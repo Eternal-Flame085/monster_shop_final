@@ -1,0 +1,9 @@
+<h1>All Discounts</h1>
+
+<% @discounts.each do |discount| %>
+  <section id="discount-<%= discount.id %>">
+    Name: <%= discount.name %><br>
+    Quantity required: <%= discount.quantity %><br>
+    Percentage off: <%= discount.discount %>%<br><br>
+  </section>
+<% end %>
