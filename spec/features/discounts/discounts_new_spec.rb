@@ -45,5 +45,44 @@ describe 'New Merchant Discount' do
 
       expect(page).to have_content("Name can't be blank")
     end
+
+    it 'I can have multiple bulk discounts in the system' do
+      visit '/merchant/discounts/new'
+
+      name_1 = '5 percent discount'
+      quantity_1 = 10
+      discount_1 = 5.0
+
+      fill_in 'discount[name]', with: name_1
+      fill_in 'discount[quantity]', with: quantity_1
+      fill_in 'discount[discount]', with: discount_1
+
+      click_button 'Create Discount'
+
+      visit '/merchant/discounts/new'
+
+      name_2 = '7 percent discount'
+      quantity_2 = 25
+      discount_2 = 7.0
+
+      fill_in 'discount[name]', with: name_2
+      fill_in 'discount[quantity]', with: quantity_2
+      fill_in 'discount[discount]', with: discount_2
+
+      click_button 'Create Discount'
+
+      discounts = Discount.all
+      within id="#discount-#{discounts.last.id}" do
+        expect(page).to have_content(name_2)
+        expect(page).to have_content(quantity_2)
+        expect(page).to have_content(discount_2)
+      end
+
+      within id="#discount-#{discounts.first.id}" do
+        expect(page).to have_content(name_1)
+        expect(page).to have_content(quantity_1)
+        expect(page).to have_content(discount_1)
+      end
+    end
   end
 end
