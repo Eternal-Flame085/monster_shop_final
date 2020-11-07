@@ -10,42 +10,23 @@ describe 'Edit Merchant Discount' do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@m_user)
     end
 
-    it "I see an edit button below every discount that leads to an edit form" do
+    it "I see a delete link below the discount" do
+      visit '/merchant/discounts'
+      within id="#discount-#{@discount.id}" do
+        expect(page).to have_button('Delete')
+      end
+    end
+
+    it "I can delete the discount" do
       visit '/merchant/discounts'
 
       within id="#discount-#{@discount.id}" do
-        click_button 'Edit'
+        click_button 'Delete'
       end
 
-      expect(current_path).to eq("/merchant/discounts/#{@discount.id}/edit")
-    end
-
-    it "I can edit the discount" do
-      visit "/merchant/discounts/#{@discount.id}/edit"
-
-      quantity = 25
-
-      fill_in 'discount[quantity]', with: quantity
-
-      click_button 'Update Discount'
-
-      expect(current_path).to eq("/merchant/discounts")
-
-      within id="#discount-#{@discount.id}" do
-        expect(page).to have_content("Quantity required: #{quantity}")
-      end
-    end
-
-    it "I cant leave form unfilled" do
-      visit "/merchant/discounts/#{@discount.id}/edit"
-
-
-      fill_in 'discount[name]', with: ''
-      fill_in 'discount[quantity]', with: ''
-
-      click_button 'Update Discount'
-
-      expect(page).to have_content("Quantity can't be blank and Name can't be blank")
+      expect(current_path).to eq('/merchant/discounts')
+      expect(page).to_not have_css("#discount-#{@discount.id}")
+      expect(page).to have_content('Discount is sucessfully deleted')
     end
   end
 end
