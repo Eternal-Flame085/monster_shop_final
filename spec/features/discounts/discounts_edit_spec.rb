@@ -35,5 +35,17 @@ describe 'Edit Merchant Discount' do
         expect(page).to have_content("Quantity required: #{quantity}")
       end
     end
+
+    it "I cant leave form unfilled" do
+      visit "/merchant/discounts/#{@discount.id}/edit"
+
+
+      fill_in 'discount[name]', with: ''
+      fill_in 'discount[quantity]', with: ''
+
+      click_button 'Update Discount'
+
+      expect(page).to have_content("Quantity can't be blank and Name can't be blank")
+    end
   end
 end
