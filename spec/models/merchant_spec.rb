@@ -33,6 +33,11 @@ RSpec.describe Merchant do
       @order_item_2 = @order_1.order_items.create!(item: @hippo, price: @hippo.price, quantity: 3)
       @order_item_3 = @order_2.order_items.create!(item: @giant, price: @hippo.price, quantity: 2)
       @order_item_4 = @order_2.order_items.create!(item: @ogre, price: @hippo.price, quantity: 2)
+
+      @discount = @brian.discounts.create(name: '5 percent', quantity: 5, discount: 5.0)
+      @discount_2 = @brian.discounts.create(name: '10 percent', quantity: 10, discount: 10.0)
+      @discount_3 = @megan.discounts.create(name: 'conflict 10 percent', quantity: 2, discount: 10.0)
+      @discount_4 = @megan.discounts.create(name: 'conflict 15 percent', quantity: 2, discount: 15.0)
     end
 
     it '.item_count' do
@@ -56,6 +61,12 @@ RSpec.describe Merchant do
 
     it '.order_items_by_order' do
       expect(@megan.order_items_by_order(@order_1.id)).to eq([@order_item_1])
+    end
+
+    it ".order_discounts" do
+      expect(@megan.order_discounts).to eq([@discount_4, @discount_3])
+
+      expect(@brian.order_discounts).to eq([@discount_2, @discount])
     end
   end
 end
