@@ -54,4 +54,12 @@ class Cart
     end
     applied_discount
   end
+
+  def subtotal_discount(item, discount)
+    subtotal_of(item.id) - (subtotal_of(item.id) * (discount.discount / 100))
+  end
+
+  def price_discount(item, discount)
+    (item.price - (item.price * (discount.discount / 100)))
+  end
 end

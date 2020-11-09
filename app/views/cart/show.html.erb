@@ -11,7 +11,7 @@
       <p>Price: <%= number_to_currency(item.price) %></p>
       <p>Quantity: <%= cart.count_of(item.id) %></p>
       <% if !@discount.nil? %>
-        <p>Subtotal:  <%= number_to_currency(cart.subtotal_of(item.id) - (cart.subtotal_of(item.id) * (@discount.discount / 100))) %></p>
+        <p>Subtotal:  <%= number_to_currency(cart.subtotal_discount(item, @discount)) %></p>
         <p><%= @discount.discount.to_i %>% Bulk Discount Applied</p>
       <% else %>
         <p>Subtotal: <%= number_to_currency(cart.subtotal_of(item.id)) %></p>

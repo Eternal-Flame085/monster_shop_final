@@ -18,7 +18,7 @@ class User::OrdersController < ApplicationController
         order.order_items.create({
           item: item,
           quantity: cart.count_of(item.id),
-          price: (item.price - (item.price * (discount.discount / 100)))
+          price: cart.price_discount(item, discount)
           })
       else
         order.order_items.create({
