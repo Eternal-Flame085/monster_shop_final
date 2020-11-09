@@ -1,7 +1,7 @@
 require 'rails_helper'
 include ActionView::Helpers::NumberHelper
 
-describe 'Edit Merchant Discount' do
+describe 'Deleting discounts' do
   describe 'As a Merchant' do
     before :each do
       @merchant_1 = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
