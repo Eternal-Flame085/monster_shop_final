@@ -1,0 +1,13 @@
+<%= form_with url: '/merchant/discounts/create', model: [:discount, @discount] do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :quantity %>
+  <%= f.number_field :quantity %>
+
+  <%= f.label :discount %>
+  <%= f.number_field :discount %>
+
+  <%= f.submit %>
+<% end %>

@@ -43,4 +43,15 @@ class Cart
   def limit_reached?(item_id)
     count_of(item_id) == Item.find(item_id).inventory
   end
+
+  def apply_discount(item)
+    applied_discount = nil
+    item.merchant.order_discounts.each do |discount|
+      if @contents[item.id.to_s] >= discount.quantity
+        applied_discount = discount
+        break
+      end
+    end
+    applied_discount
+  end
 end
