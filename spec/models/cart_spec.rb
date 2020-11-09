@@ -79,5 +79,17 @@ RSpec.describe Cart do
 
       expect(@cart.apply_discount(@hippo)).to eq(@discount_2)
     end
+
+    it ".subtotal_discount" do
+      5.times do
+        @cart.add_item(@hippo.id.to_s)
+      end
+
+      expect(@cart.subtotal_discount(@hippo, @discount)).to eq(237.5)
+    end
+
+    it ".price_discount" do
+      expect(@cart.price_discount(@hippo, @discount)).to eq(47.5)
+    end
   end
 end
