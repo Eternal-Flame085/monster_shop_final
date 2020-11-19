@@ -1,7 +1,7 @@
 class Merchant::DiscountsController < Merchant::BaseController
 
   def index
-    @discounts = Discount.all
+    @discounts = Discount.where(merchant_id: current_user.merchant.id)
   end
 
   def new
@@ -20,11 +20,11 @@ class Merchant::DiscountsController < Merchant::BaseController
   end
 
   def edit
-    @discount = Discount.find(params[:discount_id])
+    @discount = Discount.find(params[:id])
   end
 
   def update
-    @discount = Discount.find(params[:discount_id])
+    @discount = Discount.find(params[:id])
     if @discount.update(discount_params)
       redirect_to '/merchant/discounts'
     else
@@ -34,7 +34,7 @@ class Merchant::DiscountsController < Merchant::BaseController
   end
 
   def destroy
-    discount = Discount.find(params[:discount_id])
+    discount = Discount.find(params[:id])
     discount.destroy
     flash[:sucess] = 'Discount is sucessfully deleted'
     redirect_to '/merchant/discounts'

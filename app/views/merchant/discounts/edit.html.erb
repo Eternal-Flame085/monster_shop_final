@@ -1,4 +1,4 @@
-<%= form_with url: "/merchant/discounts/#{@discount.id}/update", model: @discount do |f| %>
+<%= form_with url: "/merchant/discounts/#{@discount.id}", model: @discount do |f| %>
 
   <%= f.label :name %>
   <%= f.text_field :name %>

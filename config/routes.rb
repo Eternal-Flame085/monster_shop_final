@@ -6,11 +6,18 @@ Rails.application.routes.draw do
     resources :items, only: [:index]
   end
 
-  resources :items, only: [:index, :show] do
-    resources :reviews, only: [:new, :create]
-  end
+  # resources :items, only: [:index, :show] do
+  #   resources :reviews, only: [:new, :create]
+  # end
+  get '/items', to: 'items#index'
+  get '/items/:id', to: 'items#show'
+  post '/items/:id/reviews', to: 'reviews#create'
+  get '/items/:item_id/reviews/new', to: 'reviews#new'
 
-  resources :reviews, only: [:edit, :update, :destroy]
+  #resources :reviews, only: [:edit, :update, :destroy]
+  get '/reviews/:id/edit', to: 'reviews#edit'
+  patch '/reviews/:id', to: 'reviews#update'
+  delete '/reviews/:id', to: 'reviews#destroy'
 
   get '/cart', to: 'cart#show'
   post '/cart/:item_id', to: 'cart#add_item'
@@ -39,12 +46,7 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :new, :create, :edit, :update, :destroy]
     put '/items/:id/change_status', to: 'items#change_status'
     get '/orders/:id/fulfill/:order_item_id', to: 'orders#fulfill'
-    get '/discounts', to: 'discounts#index'
-    get '/discounts/new', to: 'discounts#new'
-    post 'discounts/create', to: 'discounts#create'
-    get '/discounts/:discount_id/edit', to: 'discounts#edit'
-    patch '/discounts/:discount_id/update', to: 'discounts#update'
-    delete '/discounts/:discount_id/', to: 'discounts#destroy'
+    resources :discounts, exept: [:index, :show]
   end
 
   namespace :admin do

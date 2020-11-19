@@ -13,11 +13,11 @@ RSpec.describe 'Cart Show Page' do
 
     describe 'I can see my cart' do
       it "I can visit a cart show page to see items in my cart" do
-        visit item_path(@ogre)
+        visit "/items/#{@ogre.id}"
         click_button 'Add to Cart'
-        visit item_path(@hippo)
+        visit "/items/#{@hippo.id}"
         click_button 'Add to Cart'
-        visit item_path(@hippo)
+        visit "/items/#{@hippo.id}"
         click_button 'Add to Cart'
 
         visit '/cart'
@@ -55,11 +55,11 @@ RSpec.describe 'Cart Show Page' do
 
     describe 'I can manipulate my cart' do
       it 'I can empty my cart' do
-        visit item_path(@ogre)
+        visit "/items/#{@ogre.id}"
         click_button 'Add to Cart'
-        visit item_path(@hippo)
+        visit "/items/#{@hippo.id}"
         click_button 'Add to Cart'
-        visit item_path(@hippo)
+        visit "/items/#{@hippo.id}"
         click_button 'Add to Cart'
 
         visit '/cart'
@@ -73,11 +73,11 @@ RSpec.describe 'Cart Show Page' do
       end
 
       it 'I can remove one item from my cart' do
-        visit item_path(@ogre)
+        visit "/items/#{@ogre.id}"
         click_button 'Add to Cart'
-        visit item_path(@hippo)
+        visit "/items/#{@hippo.id}"
         click_button 'Add to Cart'
-        visit item_path(@hippo)
+        visit "/items/#{@hippo.id}"
         click_button 'Add to Cart'
 
         visit '/cart'
@@ -93,11 +93,11 @@ RSpec.describe 'Cart Show Page' do
       end
 
       it 'I can add quantity to an item in my cart' do
-        visit item_path(@ogre)
+        visit "/items/#{@ogre.id}"
         click_button 'Add to Cart'
-        visit item_path(@hippo)
+        visit "/items/#{@hippo.id}"
         click_button 'Add to Cart'
-        visit item_path(@hippo)
+        visit "/items/#{@hippo.id}"
         click_button 'Add to Cart'
 
         visit '/cart'
@@ -113,11 +113,11 @@ RSpec.describe 'Cart Show Page' do
       end
 
       it 'I can not add more quantity than the items inventory' do
-        visit item_path(@hippo)
+        visit "/items/#{@hippo.id}"
         click_button 'Add to Cart'
-        visit item_path(@hippo)
+        visit "/items/#{@hippo.id}"
         click_button 'Add to Cart'
-        visit item_path(@hippo)
+        visit "/items/#{@hippo.id}"
         click_button 'Add to Cart'
 
         visit '/cart'
@@ -134,11 +134,11 @@ RSpec.describe 'Cart Show Page' do
       end
 
       it 'I can reduce the quantity of an item in my cart' do
-        visit item_path(@hippo)
+        visit "/items/#{@hippo.id}"
         click_button 'Add to Cart'
-        visit item_path(@hippo)
+        visit "/items/#{@hippo.id}"
         click_button 'Add to Cart'
-        visit item_path(@hippo)
+        visit "/items/#{@hippo.id}"
         click_button 'Add to Cart'
 
         visit '/cart'
@@ -154,7 +154,7 @@ RSpec.describe 'Cart Show Page' do
       end
 
       it 'if I reduce the quantity to zero, the item is removed from my cart' do
-        visit item_path(@hippo)
+        visit "/items/#{@hippo.id}"
         click_button 'Add to Cart'
 
         visit '/cart'

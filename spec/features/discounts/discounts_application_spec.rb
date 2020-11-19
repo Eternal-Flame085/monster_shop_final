@@ -16,11 +16,11 @@ describe 'Discount' do
       @m_user = @megan.users.create(name: 'Megan', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218, email: 'megan@example.com', password: 'securepassword', role: :merchant_admin)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@m_user)
 
-      visit item_path(@ogre)
+      visit "/items/#{@ogre.id}"
       click_button 'Add to Cart'
-      visit item_path(@giant)
+      visit "/items/#{@giant.id}"
       click_button 'Add to Cart'
-      visit item_path(@hippo)
+      visit "/items/#{@hippo.id}"
       click_button 'Add to Cart'
       visit '/cart'
       3.times do
